@@ -99,25 +99,9 @@ const Index = () => {
             <p className="text-2xl md:text-3xl text-foreground/90 max-w-3xl mx-auto font-light">
               Your Code Becomes a World.
             </p>
-          </div>
-          
-          <div className="flex flex-wrap gap-4 justify-center text-sm">
-            <div className="px-4 py-2 rounded-lg bg-background/40 backdrop-blur-sm border border-border/50">
-              <span className="text-muted-foreground">Elegance:</span>
-              <span className="ml-2 text-primary font-mono">72%</span>
-            </div>
-            <div className="px-4 py-2 rounded-lg bg-background/40 backdrop-blur-sm border border-border/50">
-              <span className="text-muted-foreground">Chaos Storm:</span>
-              <span className="ml-2 text-accent font-mono">28%</span>
-            </div>
-            <div className="px-4 py-2 rounded-lg bg-background/40 backdrop-blur-sm border border-border/50">
-              <span className="text-muted-foreground">Naming Gravity:</span>
-              <span className="ml-2 text-primary font-mono">85%</span>
-            </div>
-            <div className="px-4 py-2 rounded-lg bg-background/40 backdrop-blur-sm border border-border/50">
-              <span className="text-muted-foreground">Creativity:</span>
-              <span className="ml-2 text-accent font-mono">94%</span>
-            </div>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              The universe evolves with you.
+            </p>
           </div>
           
           <Button 
@@ -141,9 +125,46 @@ const Index = () => {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {domains.slice(0, 3).map((domain) => (
-              <DomainCard key={domain.index} {...domain} />
-            ))}
+        <DomainCard 
+          index="01"
+          title="AlgoNebula"
+          domain="Algorithms & Data Structures"
+          description="Star nodes, comet trails, glowing neural galaxy"
+          image={planetAlgo}
+          href="/planet/algonebula"
+        />
+        <DomainCard 
+          index="02"
+          title="DeployDome"
+          domain="DevOps & Infrastructure"
+          description="Pipelines, rockets, glass and neon infrastructure"
+          image={planetDeploy}
+          href="/planet/deploydome"
+        />
+        <DomainCard 
+          index="03"
+          title="BlockTropolis"
+          domain="Web3 & Blockchain"
+          description="Ledger city with holographic blocks"
+          image={planetWeb3}
+          href="/planet/blocktropolis"
+        />
+        <DomainCard 
+          index="04"
+          title="NeuraVerse"
+          domain="AI & Machine Learning"
+          description="Brain orb with pulsing synapse ribbons"
+          image={planetAi}
+          href="/planet/neuraverse"
+        />
+        <DomainCard 
+          index="05"
+          title="Pixelora"
+          domain="UI/UX Design"
+          description="Color oceans with floating canvases"
+          image={planetUi}
+          href="/planet/pixelora"
+        />
           </div>
           
           <div className="flex justify-center gap-4 mt-8">
@@ -211,9 +232,22 @@ const Index = () => {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {domains.slice(3, 5).map((domain) => (
-              <DomainCard key={domain.index} {...domain} />
-            ))}
+            <DomainCard 
+              index="04"
+              title="NeuraVerse"
+              domain="AI & Machine Learning"
+              description="Brain orb with pulsing synapse ribbons"
+              image={planetAi}
+              href="/planet/neuraverse"
+            />
+            <DomainCard 
+              index="05"
+              title="Pixelora"
+              domain="UI/UX Design"
+              description="Color oceans with floating canvases"
+              image={planetUi}
+              href="/planet/pixelora"
+            />
           </div>
         </div>
       </section>
