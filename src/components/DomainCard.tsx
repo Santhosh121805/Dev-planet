@@ -1,4 +1,5 @@
 import { ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 
 interface DomainCardProps {
@@ -32,12 +33,14 @@ export const DomainCard = ({ index, title, domain, description, image, href }: D
           {description}
         </p>
         
-        <Button 
-          variant="default" 
-          className="w-full bg-primary text-primary-foreground hover:bg-primary/90 rounded-lg font-semibold group-hover:glow-primary transition-cosmic"
-        >
-          Explore <ArrowRight className="ml-2 h-4 w-4" />
-        </Button>
+        <Link to={href}>
+          <Button 
+            variant="default" 
+            className="w-full bg-primary text-primary-foreground hover:bg-primary/90 rounded-lg font-semibold group-hover:glow-primary transition-cosmic"
+          >
+            Explore <ArrowRight className="ml-2 h-4 w-4" />
+          </Button>
+        </Link>
       </div>
     </div>
   );
