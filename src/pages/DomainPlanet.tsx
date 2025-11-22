@@ -5,7 +5,10 @@ import { LoginModal } from "@/components/LoginModal";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Textarea } from "@/components/ui/textarea";
-import { ArrowLeft, Play } from "lucide-react";
+import { ArrowLeft, Play, Star, Rocket, Building2 } from "lucide-react";
+import AlgoNebulaContent from "@/components/AlgoNebulaContent";
+import DeployDomeContent from "@/components/DeployDomeContent";
+import BlockTropolisContent from "@/components/BlockTropolisContent";
 import algoImage from "@/assets/planet-algo.jpg";
 import deployImage from "@/assets/planet-deploy.jpg";
 import web3Image from "@/assets/planet-web3.jpg";
@@ -18,30 +21,40 @@ const planetData = {
     domain: "Algorithms & Data Structures",
     description: "Star nodes, comet trails, glowing neural galaxy",
     image: algoImage,
+    icon: <Star className="w-6 h-6" />,
+    component: AlgoNebulaContent,
   },
   "deploydome": {
     title: "DeployDome",
-    domain: "DevOps & Infrastructure",
+    domain: "DevOps & Infrastructure", 
     description: "Pipelines, rockets, glass and neon infrastructure",
     image: deployImage,
+    icon: <Rocket className="w-6 h-6" />,
+    component: DeployDomeContent,
   },
   "blocktropolis": {
     title: "BlockTropolis",
     domain: "Web3 & Blockchain",
     description: "Ledger city with holographic blocks",
     image: web3Image,
+    icon: <Building2 className="w-6 h-6" />,
+    component: BlockTropolisContent,
   },
   "neuraverse": {
     title: "NeuraVerse",
     domain: "AI & Machine Learning",
     description: "Brain orb with pulsing synapse ribbons",
     image: aiImage,
+    icon: <Star className="w-6 h-6" />,
+    component: null, // Not implemented yet
   },
   "pixelora": {
     title: "Pixelora",
     domain: "UI/UX Design",
     description: "Color oceans with floating canvases",
     image: uiImage,
+    icon: <Star className="w-6 h-6" />,
+    component: null, // Not implemented yet
   },
 };
 
@@ -131,75 +144,83 @@ export default function DomainPlanet() {
         </div>
 
         {/* Workspace */}
-        <div className="max-w-5xl mx-auto">
+        <div className="max-w-7xl mx-auto">
           <div className="rounded-2xl bg-card border border-border p-8 glow-subtle">
             <div className="flex items-center justify-between mb-6">
               <div className="flex items-center gap-3">
+                {planet.icon}
+                <span className="text-lg font-semibold text-foreground">{planet.title}</span>
                 <div className="w-3 h-3 rounded-full bg-primary animate-pulse" />
-                <span className="text-sm text-muted-foreground">Analyzer Active</span>
+                <span className="text-sm text-muted-foreground">Interactive Learning Active</span>
               </div>
             </div>
 
-            <Tabs defaultValue="practice" className="w-full">
-              <TabsList className="grid w-full grid-cols-3 mb-6">
-                <TabsTrigger value="practice">Practice</TabsTrigger>
-                <TabsTrigger value="games">Games</TabsTrigger>
-                <TabsTrigger value="quests">Quests</TabsTrigger>
-              </TabsList>
+            {planet.component ? (
+              // Render specialized planet content
+              <planet.component />
+            ) : (
+              // Fallback to generic tabs for unimplemented planets
+              <Tabs defaultValue="practice" className="w-full">
+                <TabsList className="grid w-full grid-cols-3 mb-6">
+                  <TabsTrigger value="practice">Practice</TabsTrigger>
+                  <TabsTrigger value="games">Games</TabsTrigger>
+                  <TabsTrigger value="quests">Quests</TabsTrigger>
+                </TabsList>
 
-              <TabsContent value="practice" className="space-y-6">
-                <div className="space-y-4">
-                  <Textarea 
-                    value={code}
-                    onChange={(e) => setCode(e.target.value)}
-                    placeholder="// Write code to awaken this world..."
-                    className="min-h-[300px] font-mono bg-background/50"
-                  />
-                  <Button 
-                    onClick={handleSubmit}
-                    className="w-full bg-primary text-primary-foreground hover:bg-primary/90 rounded-lg font-semibold"
-                    disabled={!code.trim()}
-                  >
-                    <Play className="mr-2 h-4 w-4" />
-                    Submit & Run
-                  </Button>
-                </div>
+                <TabsContent value="practice" className="space-y-6">
+                  <div className="space-y-4">
+                    <Textarea 
+                      value={code}
+                      onChange={(e) => setCode(e.target.value)}
+                      placeholder="// Write code to awaken this world..."
+                      className="min-h-[300px] font-mono bg-background/50"
+                    />
+                    <Button 
+                      onClick={handleSubmit}
+                      className="w-full bg-primary text-primary-foreground hover:bg-primary/90 rounded-lg font-semibold"
+                      disabled={!code.trim()}
+                    >
+                      <Play className="mr-2 h-4 w-4" />
+                      Submit & Run
+                    </Button>
+                  </div>
 
-                {!hasSubmitted && (
-                  <div className="text-center py-8 space-y-2">
-                    <p className="text-muted-foreground italic">
-                      Write code to awaken this world.
+                  {!hasSubmitted && (
+                    <div className="text-center py-8 space-y-2">
+                      <p className="text-muted-foreground italic">
+                        Write code to awaken this world.
+                      </p>
+                    </div>
+                  )}
+
+                  {hasSubmitted && (
+                    <div className="rounded-lg bg-background/50 border border-border p-6">
+                      <p className="text-sm text-muted-foreground italic">
+                        The Analyzer is listening...
+                      </p>
+                    </div>
+                  )}
+                </TabsContent>
+
+                <TabsContent value="games" className="space-y-6">
+                  <div className="text-center py-12 space-y-3">
+                    <h3 className="text-xl font-semibold text-foreground">Challenge Games</h3>
+                    <p className="text-muted-foreground italic max-w-md mx-auto">
+                      This planet's interactive features are coming soon...
                     </p>
                   </div>
-                )}
+                </TabsContent>
 
-                {hasSubmitted && (
-                  <div className="rounded-lg bg-background/50 border border-border p-6">
-                    <p className="text-sm text-muted-foreground italic">
-                      The Analyzer is listening...
+                <TabsContent value="quests" className="space-y-6">
+                  <div className="text-center py-12 space-y-3">
+                    <h3 className="text-xl font-semibold text-foreground">Skill Quests</h3>
+                    <p className="text-muted-foreground italic max-w-md mx-auto">
+                      This planet's quest system is coming soon...
                     </p>
                   </div>
-                )}
-              </TabsContent>
-
-              <TabsContent value="games" className="space-y-6">
-                <div className="text-center py-12 space-y-3">
-                  <h3 className="text-xl font-semibold text-foreground">Challenge Games</h3>
-                  <p className="text-muted-foreground italic max-w-md mx-auto">
-                    Write code to awaken this world.
-                  </p>
-                </div>
-              </TabsContent>
-
-              <TabsContent value="quests" className="space-y-6">
-                <div className="text-center py-12 space-y-3">
-                  <h3 className="text-xl font-semibold text-foreground">Skill Quests</h3>
-                  <p className="text-muted-foreground italic max-w-md mx-auto">
-                    Write code to awaken this world.
-                  </p>
-                </div>
-              </TabsContent>
-            </Tabs>
+                </TabsContent>
+              </Tabs>
+            )}
           </div>
         </div>
       </main>

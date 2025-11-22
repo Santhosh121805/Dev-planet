@@ -118,8 +118,45 @@ All colors MUST be HSL.
     box-shadow: 0 0 30px hsl(var(--primary) / 0.3);
   }
 
+  .glow-purple {
+    box-shadow: 0 0 30px rgba(147, 51, 234, 0.4);
+  }
+
   .glow-subtle {
     box-shadow: 0 4px 20px hsl(240 35% 5% / 0.5);
+  }
+
+  /* Planet Glow Effect */
+  .glow {
+    box-shadow: 
+      0 0 50px rgba(147, 51, 234, 0.4),
+      0 0 100px rgba(147, 51, 234, 0.2),
+      inset 0 0 50px rgba(147, 51, 234, 0.1);
+    animation: planetPulse 4s ease-in-out infinite alternate;
+  }
+
+  @keyframes planetPulse {
+    0% {
+      box-shadow: 
+        0 0 50px rgba(147, 51, 234, 0.4),
+        0 0 100px rgba(147, 51, 234, 0.2),
+        inset 0 0 50px rgba(147, 51, 234, 0.1);
+    }
+    100% {
+      box-shadow: 
+        0 0 70px rgba(147, 51, 234, 0.6),
+        0 0 140px rgba(147, 51, 234, 0.3),
+        inset 0 0 70px rgba(147, 51, 234, 0.15);
+    }
+  }
+
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
   }
 }
 

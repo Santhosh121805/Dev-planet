@@ -2,8 +2,10 @@ import { useState } from "react";
 import { Navigation } from "@/components/Navigation";
 import { LoginModal } from "@/components/LoginModal";
 import { DomainCard } from "@/components/DomainCard";
-import { AnalyzerPanel } from "@/components/AnalyzerPanel";
 import { PlanetPreview } from "@/components/PlanetPreview";
+import { MilkyWayGalaxy } from "@/components/MilkyWayGalaxy";
+import CreateProfileModal from "@/components/CreateProfileModal";
+import { mockDevelopers, type Developer } from "@/lib/mockDevelopers";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -16,7 +18,10 @@ import planetUi from "@/assets/planet-ui.jpg";
 
 const Index = () => {
   const [loginOpen, setLoginOpen] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [createOpen, setCreateOpen] = useState(false);
+
+  // Developers state (initialized with mock data)
+  const [developers, setDevelopers] = useState<Developer[]>(mockDevelopers);
 
   const domains = [
     {
@@ -64,14 +69,7 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background">
       <Navigation 
-        onLoginClick={() => {
-          if (isLoggedIn) {
-            // Go to profile
-          } else {
-            setLoginOpen(true);
-          }
-        }}
-        isLoggedIn={isLoggedIn}
+        onLoginClick={() => setLoginOpen(true)}
       />
       
       <LoginModal open={loginOpen} onOpenChange={setLoginOpen} />
@@ -90,9 +88,6 @@ const Index = () => {
         
         <div className="relative z-10 container mx-auto px-6 text-center space-y-8">
           <div className="space-y-4">
-            <div className="inline-block text-section text-muted-foreground mb-4">
-              The Analyzer Studies Your Style
-            </div>
             <h1 className="text-hero text-foreground drop-shadow-2xl">
               DEV/PLANET
             </h1>
@@ -214,41 +209,27 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Analyzer Section */}
-      <section id="analyzer" className="py-24 px-6">
-        <div className="container mx-auto max-w-5xl">
-          <AnalyzerPanel />
-        </div>
-      </section>
-
-      {/* Gallery Section */}
-      <section id="gallery" className="py-24 px-6 bg-muted/30">
+      {/* MilkyWay Galaxy Section */}
+      <section id="milkyway" className="py-24 px-6 bg-muted/30">
         <div className="container mx-auto">
-          <div className="flex items-center justify-between mb-12">
-            <div>
-              <div className="text-section text-muted-foreground mb-2">Community Showcase</div>
-              <h2 className="text-4xl md:text-5xl font-bold text-foreground">Browse Our Galaxy</h2>
-            </div>
+          <div className="text-center mb-12">
+            <div className="text-section text-muted-foreground mb-2">Developer Universe</div>
+            <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">Explore the MilkyWay</h2>
+            <p className="text-lg text-muted-foreground max-w-3xl mx-auto mb-6">
+              Discover and collaborate with developers across the galaxy. Each node represents a developer, 
+              grouped by their expertise in different programming languages and frameworks.
+            </p>
+            <Button 
+              size="lg"
+              className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white rounded-lg h-12 px-8 font-semibold glow-purple hover-scale"
+              onClick={() => setCreateOpen(true)}
+            >
+              Create Your Developer Profile
+            </Button>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <DomainCard 
-              index="04"
-              title="NeuraVerse"
-              domain="AI & Machine Learning"
-              description="Brain orb with pulsing synapse ribbons"
-              image={planetAi}
-              href="/planet/neuraverse"
-            />
-            <DomainCard 
-              index="05"
-              title="Pixelora"
-              domain="UI/UX Design"
-              description="Color oceans with floating canvases"
-              image={planetUi}
-              href="/planet/pixelora"
-            />
-          </div>
+          <MilkyWayGalaxy developers={developers} onOpenCreate={() => setCreateOpen(true)} />
+          <CreateProfileModal open={createOpen} onOpenChange={setCreateOpen} onCreate={(dev) => setDevelopers(prev => [...prev, dev])} />
         </div>
       </section>
 
